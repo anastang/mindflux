@@ -31,16 +31,10 @@ This Simon Says game challenges players to mimic an increasingly longer sequence
 - **Increasing Sequence Difficulty**  
   Each successful round adds a new random direction to the sequence, upping the challenge.
 
-- **Keyboard Support**  
-  Press the arrow keys (↑, →, ↓, ←) to input your response.
-
-- **On-Screen Clickable Arrows**  
-  Offers an alternative control mechanism.
-
-- **Gesture Detection (Optional)**  
+- **Gesture Detection**  
   Integrate with a Python script that uses [Mediapipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker) for capturing hand signals.
 
-- **Emotion Tracking (Optional)**  
+- **Emotion Tracking**  
   Integrate with a Python script that uses [DeepFace](https://github.com/serengil/deepface) or other emotion detection libraries.
 
 - **Local Storage**  
