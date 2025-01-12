@@ -26,13 +26,9 @@ gesture_counts = {
 
 # Define font and text size
 font = cv2.FONT_HERSHEY_SIMPLEX
-font_scale = 0.9
+font_scale = 0.7
 font_thickness = 2
 
-# Load logo (optional)
-overlay_img = cv2.imread("llama.jpg", cv2.IMREAD_UNCHANGED)
-if overlay_img is not None:
-    overlay_img = cv2.resize(overlay_img, (50, 50))  # Resize logo if desired
 
 # ------------------ EMOTION DETECTION SETUP ------------------ #
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
@@ -177,6 +173,14 @@ if not cap.isOpened():
     print("Error: Could not open webcam.")
     exit()
 
+# Suppose you have some variables for performance analytics
+current_level = 1
+current_score = 0
+
+# Optionally, if you have a logo image, load it here (ensure overlay_img is not None if you have an image)
+overlay_img = None
+# overlay_img = cv2.imread("path_to_your_logo_image.png", cv2.IMREAD_UNCHANGED)
+
 # ---------------------- MAIN LOOP ------------------------- #
 while True:
     ret, frame = cap.read()
@@ -189,9 +193,9 @@ while True:
     frame = cv2.resize(frame, (600, 400))
 
     # Draw a thick border around the frame
-    border_thickness = 50
+    border_thickness = 25
     frame_height, frame_width, _ = frame.shape
-    border_color = (201, 170, 136)  # Border colour
+    border_color = (0, 46, 0)  # Border colour
     cv2.rectangle(frame, (0, 0), (frame_width - 1, frame_height - 1), border_color, border_thickness)
 
     # ---------------- GESTURE DETECTION ---------------- #
@@ -236,32 +240,24 @@ while True:
     # Draw performance
     draw_performance(frame)
 
-    # Optional: place your logo in the bottom-right corner
-    if overlay_img is not None:
-        h, w, _ = overlay_img.shape
-        x_offset = frame.shape[1] - w - 10
-        y_offset = frame.shape[0] - h - 10
-
-        # If it has an alpha channel (4th channel)
-        if overlay_img.shape[2] == 4:
-            bgr_img = overlay_img[:, :, :3]
-            alpha_channel = overlay_img[:, :, 3] / 255.0
-            for c in range(3):
-                frame[y_offset:y_offset+h, x_offset:x_offset+w, c] = \
-                    frame[y_offset:y_offset+h, x_offset:x_offset+w, c] * (1 - alpha_channel) + \
-                    bgr_img[:, :, c] * alpha_channel
-        else:
-            frame[y_offset:y_offset+h, x_offset:x_offset+w] = overlay_img
-
     # Show the final integrated view
     cv2.imshow("Gesture + Emotion Detection", frame)
 
     # Print emotion counts (optional, remove if too spammy)
     print("Emotion Counts:", emotion_counts)
 
+    # --------------- Key Handling for Quit & Reset --------------- #
+    key = cv2.waitKey(1) & 0xFF
     # Press 'q' to quit
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if key == ord('q'):
         break
+    # Press 'r' to reset both gesture and emotion counters
+    elif key == ord('r'):
+        for g in gesture_counts:
+            gesture_counts[g] = 0
+        for e in emotion_counts:
+            emotion_counts[e] = 0
+        print("All counters have been reset.")
 
 # After collecting emotion and gesture counts
 analytics_data = {
