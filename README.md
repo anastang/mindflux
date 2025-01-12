@@ -12,6 +12,8 @@ A modern twist on the classic Simon Says game. Watch the sequence of arrows, the
 4. [Challenges](#challenges)  
 5. [How It Works](#how-it-works)  
 6. [Setup & Installation](#setup--installation)  
+   - [Prerequisites](#prerequisites)
+   - [Installation Steps](#installation-steps)  
 7. [Usage](#usage)  
 8. [Dashboard & Analytics](#dashboard--analytics)  
 9. [Python Requirements](#python-requirements)  
@@ -22,124 +24,165 @@ A modern twist on the classic Simon Says game. Watch the sequence of arrows, the
 
 ## Overview
 
-This Simon Says game challenges players to mimic an increasingly longer sequence of directional arrows. When the player’s input matches the displayed sequence, the sequence lengthens; once the input differs, the game ends. Throughout the game, data such as scores, levels, and arrow presses are stored locally for analytics. A **Dashboard** provides a visual overview of the player’s progress over multiple sessions and can also display simulated or real emotion data (captured from a Python script running Mediapipe and DeepFace, if desired).
+**MindFlux** is a Simon Says-inspired game that challenges players to replicate an increasingly longer sequence of directional arrows. Players can input responses using hand gestures, arrow keys, or on-screen buttons. Each successful round increases the sequence length; an incorrect response ends the game. 
+
+The game also includes:
+
+- **Analytics Dashboard** to track scores, gesture distribution, and emotion data over time.
+- **Emotion Tracking** via a Python script using Mediapipe and DeepFace, enhancing the gameplay experience and providing insights into player behavior.
 
 ---
 
 ## Features
 
-- **Increasing Sequence Difficulty**  
-  Each successful round adds a new random direction to the sequence, upping the challenge.
+### Core Features
+- **Dynamic Difficulty**
+  - Each successful round adds a new direction to the sequence, increasing complexity.
 
-- **Gesture Detection**  
-  Integrate with a Python script that uses [Mediapipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker) for capturing hand signals.
+- **Gesture-Based Input**
+  - Uses [Mediapipe Hands](https://developers.google.com/mediapipe/solutions/vision/hand_landmarker) to detect hand signals for game controls.
 
-- **Emotion Tracking**  
-  Integrate with a Python script that uses [DeepFace](https://github.com/serengil/deepface) or other emotion detection libraries.
+- **Emotion Tracking**
+  - Integrates with [DeepFace](https://github.com/serengil/deepface) for emotion detection, enriching analytics.
 
-- **Local Storage**  
-  Player results (score, gestures, emotions) are automatically saved in the browser.
+- **Local Data Storage**
+  - Automatically saves player scores, gesture usage, and emotions in the browser for future analysis.
 
-- **Analytics Dashboard**  
-  View performance over time, distribution of gestures, and aggregated emotion data in user-friendly charts.
+- **Interactive Analytics Dashboard**
+  - Displays performance metrics and emotion trends in user-friendly charts.
+
+### Additional Features
+- **Cross-Platform Support**
+  - Playable on devices with keyboards, touchscreens, or cameras for hand gesture recognition.
+- **Customizable Backend**
+  - Python backend allows for easy integration of new gesture models or emotion recognition features.
 
 ---
 
 ## Use Cases & Benefits
 
-1. **Assisting People with Disabilities**  
-   - By detecting hand gestures (via Mediapipe) or arrow key presses, individuals with limited mobility in one or more limbs can still participate.  
-   - The game can be adapted to a range of physical capabilities by supporting multiple input methods (keyboard, clicks, or gestures).
+### 1. Accessibility
+- **Inclusive Gameplay:** Supports multiple input methods (gesture, keyboard, or on-screen buttons) to cater to players with varying physical abilities.
+- **Adaptive Features:** Adjustable difficulty levels and gesture recognition make the game accessible to individuals with mobility challenges.
 
-2. **Improving Motor Skills**  
-   - The repetitive nature of Simon Says (rapid pressing or gesturing in response to prompts) can enhance hand–eye coordination and fine motor skills.  
-   - Hand gesture detection encourages active movement, which can be beneficial in rehabilitative or therapeutic settings.
+### 2. Cognitive and Motor Skill Development
+- **Memory and Focus:** Enhances short-term memory, recall, and attentional control through repetitive pattern recognition.
+- **Motor Skills:** Encourages active hand movements, aiding in fine motor skill development and rehabilitation.
 
-3. **Recognizing ADHD or Other Attention/Executive Function Challenges**  
-   - Simon Says inherently requires focus and recall (short-term memory), which may help identify difficulties in attention span.  
-   - The game’s progressive difficulty highlights possible challenges in sustaining mental focus and working memory—useful for early screening or supplemental training.
+### 3. Attention and Behavioral Screening
+- **Focus Testing:** Highlights attention span and working memory challenges, potentially aiding in ADHD or executive function assessments.
+- **Therapeutic Benefits:** Offers structured activities for cognitive rehabilitation, particularly for individuals recovering from brain injuries.
 
-4. **Cognitive Rehabilitation**  
-   - The gradual increase in sequence length encourages sustained attention and working memory practice.  
-   - This can be especially helpful for individuals recovering from brain injuries or those with mild cognitive impairments, as it trains sequencing, recall, and attentional control.
+### 4. Emotional Insights
+- Tracks and visualizes emotional responses during gameplay, providing valuable data for user behavior analysis or therapeutic applications.
 
 ---
 
 ## Challenges
 
-1. **Accurate Gesture Recognition**  
-   - Reliance on real-time hand tracking and landmark detection can lead to false positives or missed gestures if lighting or background conditions are suboptimal.  
-   - Ensuring robust detection across different skin tones, hand poses, and user behaviors is crucial for an inclusive experience.
+### 1. Gesture Recognition Accuracy
+- Real-time tracking may falter in suboptimal lighting or with complex backgrounds.
+- Ensuring accurate detection across diverse hand shapes, sizes, and skin tones is a priority.
 
-2. **Maintaining Smooth Performance in Real-Time**  
-   - Running Mediapipe, DeepFace, or other ML frameworks in parallel with the React app can be resource-intensive.  
-   - Optimizations (e.g., limiting the detection frequency, handling frames efficiently) may be required to avoid lagging UI and input delays.
+### 2. Performance Optimization
+- Running Mediapipe and DeepFace alongside the React app can be resource-intensive.
+- Efficient frame handling and reduced detection frequency are critical to maintaining smooth gameplay.
 
 ---
 
 ## How It Works
 
-### 1. Frontend (React)
+### Frontend (React)
+1. **Gameplay Logic**
+   - Generates a random sequence of directions (UP, RIGHT, DOWN, LEFT) for the player to mimic.
+   - Handles inputs via keyboard, on-screen buttons, or hand gestures.
 
-- **Gameplay**  
-  A random sequence of directions (UP, RIGHT, DOWN, LEFT) is generated and shown to the user.  
-  The user repeats the sequence using arrow keys or by clicking on-screen arrows.  
-  Success leads to a longer sequence; an incorrect response ends the game.
+2. **Local Data Storage**
+   - Saves session data (score, level, gestures, emotions) in the browser.
 
-- **Local Storage**  
-  After each game, the score, level, and gesture usage are stored in local storage as a game result.  
-  Simulated or real **emotion data** can also be stored.
+3. **Dashboard**
+   - Visualizes player progress and behavior metrics using Chart.js.
 
-### 2. Python Script 
-
-- A separate Python script (using Mediapipe and DeepFace) runs in the background:  
-  1. **Gesture Detection**: Mediapipe tracks the user’s hand landmarks, interpreting gestures (up, down, left, right), which can be sent to the React app.  
-  2. **Emotion Detection**: A face detection model (e.g., DeepFace) extracts the user’s dominant emotion (happy, sad, angry, etc.).
-
-- The data from the Python script is sent to the React frontend (e.g., via an API endpoint like `localhost:5000/submit-data`).  
-- The React app merges these gestures with standard keyboard inputs, updating the user’s progress.  
-- The Python script can also log/store emotion data locally, or pass it to the React app for display on the **Dashboard**.
+### Backend (Python)
+1. **Gesture Detection**
+   - Uses Mediapipe to track hand landmarks and interpret gestures.
+2. **Emotion Detection**
+   - Employs DeepFace to analyze facial expressions and identify emotions (happy, sad, neutral, etc.).
+3. **Data Transmission**
+   - Sends gesture and emotion data to the React frontend via an API endpoint.
 
 ---
 
 ## Setup & Installation
 
 ### Prerequisites
+- **Node.js** (v14+ recommended)
+- **npm** or **yarn**
+- **Python 3.7+**
 
-- **Node.js** (v14+ recommended)  
-- **npm** or **yarn**  
-- **Python 3.7+** if integrating gesture and emotion detection
+### Installation Steps
 
-### Steps
+#### Clone the Repository
+```bash
+git clone https://github.com/anastang/mindflux-v2.git
+cd mindflux-v2
+```
 
-1. **Clone this repository**:
-   git clone https://github.com/anastang//mindflux-v2
-   We will have two terminals
-   
-2. **Backend**
-   1. cd backend
-   2. pip install -r requirements.txt
-   3. python script.py
-  
-3. **Frontend**
-   1. cd frontend
-   2. npm install
-   3. npm run dev
-   4. click on link if webpage does not open
+#### Backend Setup
+```bash
+cd backend
+pip install -r requirements.txt
+python script.py
+```
 
-Dashboard & Analytics
-Score & Level Progress (Line Chart)
-Tracks how your score and level evolve across multiple game sessions.
+#### Frontend Setup
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-Gesture Distribution (Pie Chart)
-Shows how often each direction (UP, RIGHT, DOWN, LEFT) was used across all games.
+Open the provided URL to access the app.
 
-Emotion Distribution (Bar Chart)
-Aggregates the counts of detected emotions (happy, sad, neutral, etc.) across all games.
+---
 
-Author Credits
-By:
+## Usage
 
-Anastan Gnanapragasam
-Adriel De Vera
-Romeo Junior Barbieto
+1. Start the Python script to enable gesture and emotion detection.
+2. Launch the React frontend to play the game.
+3. Monitor performance and analytics via the Dashboard.
+
+---
+
+## Dashboard & Analytics
+
+### Visualizations
+- **Score & Level Progress (Line Chart):** Tracks how your score and level evolve across sessions.
+- **Gesture Distribution (Pie Chart):** Displays frequency of each directional gesture.
+- **Emotion Distribution (Bar Chart):** Aggregates detected emotions over gameplay.
+
+---
+
+## Python Requirements
+
+Ensure the following Python libraries are installed:
+- `mediapipe`
+- `deepface`
+- `flask`
+
+Install dependencies using:
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Author Credits
+
+- Anastan Gnanapragasam
+- Adriel De Vera
+- Romeo Junior Barbieto
+
+---
+
+
