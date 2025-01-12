@@ -1,6 +1,6 @@
 # **MindFlux**
 
-A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using your keyboard (or by clicking the arrow buttons). Built with **React**, **TypeScript**, **Chart.js** for analytics, and optionally integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
+A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using your keyboard (or by clicking the arrow buttons). Built with **React**, **TypeScript**, **Chart.js** for analytics, and integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
 
 ---
 
@@ -14,7 +14,7 @@ A modern twist on the classic Simon Says game. Watch the sequence of arrows, the
 6. [Setup & Installation](#setup--installation)  
 7. [Usage](#usage)  
 8. [Dashboard & Analytics](#dashboard--analytics)  
-9. [Python Requirements (Optional)](#python-requirements-optional)  
+9. [Python Requirements](#python-requirements)  
 10. [Author Credits](#author-credits)  
 11. [License](#license)
 
@@ -108,20 +108,24 @@ This Simon Says game challenges players to mimic an increasingly longer sequence
 
 - **Node.js** (v14+ recommended)  
 - **npm** or **yarn**  
-- **(Optional) Python 3.7+** if integrating gesture and emotion detection
+- **Python 3.7+** if integrating gesture and emotion detection
 
 ### Steps
 
 1. **Clone this repository**:
-   ```bash
-   git clone https://github.com/your-username/simon-says-react-game.git
-   cd simon-says-react-game
-2. **Install Dependencies**:
-   npm install
-3. **Set up python script**
-   pip install -r requirements.txt
-4. **Start server**
-   npm run dev
+   git clone https://github.com/anastang//mindflux-v2
+   We will have two terminals
+   
+2. **Backend**
+   1. cd backend
+   2. pip install -r requirements.txt
+   3. python script.py
+  
+3. **Frontend**
+   1. cd frontend
+   2. npm install
+   3. npm run dev
+   4. click on link if webpage does not open
 
 Dashboard & Analytics
 Score & Level Progress (Line Chart)
