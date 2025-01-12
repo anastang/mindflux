@@ -5,6 +5,7 @@ import time
 import numpy as np
 from deepface import DeepFace
 import requests
+import json
 
 # ------------------ GESTURE DETECTION SETUP ------------------ #
 mp_hands = mp.solutions.hands
