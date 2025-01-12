@@ -1,6 +1,6 @@
 # **MindFlux**
 
-A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using your keyboard (or by clicking the arrow buttons). Built with **React**, **TypeScript**, **Chart.js** for analytics, and integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
+A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using hand gestures. Built with **React**, **TypeScript**, **Chart.js** for analytics, and integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
 
 ---
 
