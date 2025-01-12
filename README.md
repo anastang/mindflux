@@ -2,6 +2,9 @@
 
 A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using hand gestures. Built with **React**, **TypeScript**, **Chart.js** for analytics, and integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
 
+![image](https://github.com/user-attachments/assets/e0b5fb31-702b-4cc5-a5cb-575112de42f5)
+
+
 ---
 
 ## Table of Contents
@@ -160,6 +163,7 @@ Open the provided URL to access the app.
 - **Score & Level Progress (Line Chart):** Tracks how your score and level evolve across sessions.
 - **Gesture Distribution (Pie Chart):** Displays frequency of each directional gesture.
 - **Emotion Distribution (Bar Chart):** Aggregates detected emotions over gameplay.
+![image](https://github.com/user-attachments/assets/c193fd4a-c01f-4dab-992a-380551ae4880)
 
 ---
 
