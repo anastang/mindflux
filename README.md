@@ -21,7 +21,6 @@ A modern twist on the classic Simon Says game. Watch the sequence of arrows, the
 8. [Dashboard & Analytics](#dashboard--analytics)  
 9. [Python Requirements](#python-requirements)  
 10. [Author Credits](#author-credits)  
-11. [License](#license)
 
 ---
 
