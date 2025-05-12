@@ -2,8 +2,7 @@
 
 A modern twist on the classic Simon Says game. Watch the sequence of arrows, then repeat them using hand gestures. Built with **React**, **TypeScript**, **Chart.js** for analytics, and integrated with a **Python-based Mediapipe script** for gesture recognition and basic emotion tracking.
 
-![image](https://github.com/user-attachments/assets/e0b5fb31-702b-4cc5-a5cb-575112de42f5)
-
+![Untitled](https://github.com/user-attachments/assets/bd4a8b3b-5570-4219-a1bc-5db6cd12e7ef)
 
 ---
 
